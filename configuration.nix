@@ -13,16 +13,18 @@ in
 			la = "ls -la";
 			update = "sudo nixos-rebuild switch";
 		};
-		oh-my-zsh = {
+		ohMyZsh = {
 			enable = true;
 			plugins = [ "git" ];
 			theme = "gnzh";
 		};
 	};
 	users = {
+		defaultUserShell = pkgs.zsh;
 		users.c1r5dev = {
 		  isNormalUser = true;
 		  description = user;
+		  hashedPassword = "$6$6Ryb5VE0lOrBQd8K$mxCs1qVLMwReAtnK9slIN.Z53mnU85xlJO7c1H9IhwEpqeCfNEIOVY0wx4Xc5NO1O8wVWH3Rc0eeHk/3BR3lm/";
 		  extraGroups = [ "networkmanager" "wheel" ];
 		  packages = with pkgs; [];
 		};
@@ -38,7 +40,9 @@ in
 	hardware.graphics = {
 		enable = true;
 	};
-		
+	
+	hardware.nvidia.open = false;
+	
 	virtualisation.docker = {
 		enable = true;
 		rootless = {
@@ -50,7 +54,7 @@ in
 	boot.loader.systemd-boot.enable = true;
 	boot.loader.efi.canTouchEfiVariables = true;
 
-	networking.hostName = "nixos"; 
+	networking.hostName = "c1r5dev-os"; 
 	networking.networkmanager.enable = true;
 		
 	time.timeZone = "America/Sao_Paulo";
@@ -79,7 +83,7 @@ in
 	security.rtkit.enable = true;
 
 	services.printing.enable = true;
-	services.pulseaudio.enable = false;
+	hardware.pulseaudio.enable = false;
 	services.pipewire = {
 		enable = true;
 		alsa.enable = true;
