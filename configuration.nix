@@ -101,8 +101,6 @@ in
 	environment.systemPackages = with pkgs; [
 		jetbrains-toolbox
 		jetbrains.jdk
-		jetbrains.idea-ultimate
-		jetbrains.webstorm
 		vim 
 		wget
 	];
