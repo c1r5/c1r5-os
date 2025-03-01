@@ -3,34 +3,41 @@ let
 	user = "c1r5dev";
 in
 {
-	programs.zsh = {
-		enable = true;
-		enableCompletion = true;
-		enableAutosuggestions = true;
-		syntaxHighlighting.enable = true;
-		shellAliases = {
-			ll = "ls -l";
-			la = "ls -la";
-			update = "sudo nixos-rebuild switch";
-		};
-		ohMyZsh = {
+	services.udev.packages = [
+    pkgs.android-udev-rules
+  ];
+
+	programs = {
+		firefox.enable = true;
+		zsh = {
 			enable = true;
-			plugins = [ "git" ];
-			theme = "gnzh";
+			enableCompletion = true;
+			enableAutosuggestions = true;
+			syntaxHighlighting.enable = true;
+			shellAliases = {
+				ll = "ls -l";
+				la = "ls -la";
+				update = "sudo nixos-rebuild switch";
+			};
+			ohMyZsh = {
+				enable = true;
+				plugins = [ "git" ];
+				theme = "gnzh";
+			};
 		};
 	};
+
 	users = {
 		defaultUserShell = pkgs.zsh;
 		users.c1r5dev = {
 		  isNormalUser = true;
 		  description = user;
 		  hashedPassword = "$6$6Ryb5VE0lOrBQd8K$mxCs1qVLMwReAtnK9slIN.Z53mnU85xlJO7c1H9IhwEpqeCfNEIOVY0wx4Xc5NO1O8wVWH3Rc0eeHk/3BR3lm/";
-		  extraGroups = [ "networkmanager" "wheel" ];
+		  extraGroups = [ "networkmanager" "wheel" "adbusers" "kvm"];
 		  packages = with pkgs; [];
 		};
 	};
   
-	programs.firefox.enable = true;
 	nixpkgs.config.allowUnfree = true;
 	
 	nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -92,6 +99,9 @@ in
 	};
 
 	environment.systemPackages = with pkgs; [
+		jetbrains-toolbox
+		jetbrains.jdk
+		jetbrains.idea-ultimate
 		vim 
 		wget
 	];
