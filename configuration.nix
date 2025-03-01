@@ -102,6 +102,7 @@ in
 		jetbrains-toolbox
 		jetbrains.jdk
 		jetbrains.idea-ultimate
+		jetbrains.webstorm
 		vim 
 		wget
 	];

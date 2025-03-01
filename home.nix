@@ -38,8 +38,17 @@ in
 
 	dconf = {
 		enable = true;
-
 		settings = {
+			"org/gnome/shell" = {
+				disable-user-extensions = false;
+				enabled-extensions = with pkgs.gnomeExtensions; [
+					blur-my-shell.extensionUuid
+					system-monitor.extensionUuid
+					dash-to-dock.extensionUuid
+					apps-menu.extensionUuid
+				];
+			};
+
 			"org/gnome/desktop/interface" = {
 				clock-show-weekday = true;
 				color-scheme = "prefer-dark";
@@ -48,8 +57,6 @@ in
 	};
 
 	programs = {
-		adb.enable = true;
-		
 		direnv.enable = true;
 
 		neovim = {
@@ -74,7 +81,7 @@ in
 		packages = with pkgs; [
 			#VoIp
 			discord-ptb
-			
+
 			# Terminal 
 			kitty
 
