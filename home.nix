@@ -40,15 +40,14 @@ in
 		enable = true;
 		settings = {
 			"org/gnome/shell" = {
-				disable-user-extensions = false;
-				enabled-extensions = with pkgs.gnomeExtensions; [
-					blur-my-shell.extensionUuid
-					system-monitor.extensionUuid
-					dash-to-dock.extensionUuid
-					apps-menu.extensionUuid
+				disable-user-extensions = false; # Ensure extensions are not disabled
+				enabled-extensions = [
+					pkgs.gnomeExtensions.dash-to-dock.extensionUuid
+					pkgs.gnomeExtensions.blur-my-shell.extensionUuid
+					# Add UUIDs for other extensions
 				];
-			};
-
+    	};
+			
 			"org/gnome/desktop/interface" = {
 				clock-show-weekday = true;
 				color-scheme = "prefer-dark";
