@@ -18,7 +18,7 @@ in
 				ll = "ls -l";
 				la = "ls -la";
 				update = "sudo nixos-rebuild switch";
-				flake-update = "sudo nixos-rebuild switch --flake ."
+				flake-update = "sudo nixos-rebuild switch --flake .";
 			};
 			ohMyZsh = {
 				enable = true;
