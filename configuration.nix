@@ -18,6 +18,7 @@ in
 				ll = "ls -l";
 				la = "ls -la";
 				update = "sudo nixos-rebuild switch";
+				flake-update = "sudo nixos-rebuild switch --flake ."
 			};
 			ohMyZsh = {
 				enable = true;
@@ -99,6 +100,7 @@ in
 	};
 
 	environment.systemPackages = with pkgs; [
+		spotify
 		jetbrains-toolbox
 		jetbrains.jdk
 		vim 
