@@ -3,6 +3,7 @@ let
 	user = "c1r5dev";
 in
 {
+	services.flatpak.enable = true;
 	services.udev.packages = [
     pkgs.android-udev-rules
   ];
@@ -100,6 +101,8 @@ in
 	};
 
 	environment.systemPackages = with pkgs; [
+		flatpak
+		flatpak-builder
 		spotify
 		jetbrains-toolbox
 		jetbrains.jdk

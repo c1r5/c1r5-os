@@ -78,6 +78,9 @@ in
 		username = user;
 		homeDirectory = "/home/${user}";
 		packages = with pkgs; [
+			#Torrent
+			qbittorrent
+
 			#VoIp
 			discord-ptb
 
