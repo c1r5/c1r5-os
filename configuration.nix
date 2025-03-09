@@ -101,15 +101,52 @@ in
 	};
 
 	environment.systemPackages = with pkgs; [
-		flatpak
-		flatpak-builder
-		spotify
+		# Lang 
+		python3
+		rustup
+		nodejs
+		kotlin
+		gcc
+		clang-tools
+
+		# Tools
+		gearlever
+
+		# Web Browser
+		google-chrome
+
+		# archives
+		zip
+		xz
+		unzip
+		p7zip
+
+		# Development
 		jetbrains-toolbox
 		jetbrains.jdk
-		vim 
+
+		# CLI
+		git
+		usbutils
+		nvitop
+		iftop
+		iotop
+		htop
+		lsof
+
+		# Editor
+		vim
 		wget
 	];
-		
+	
+	networking.firewall = {
+		enable = true;
+		allowedTCPPorts = [
+			4000
+			8080
+			3000
+		];
+	};
 	environment.variables.EDITOR = "vim";
 	system.stateVersion = "24.11";
 }

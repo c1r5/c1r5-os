@@ -78,6 +78,11 @@ in
 		username = user;
 		homeDirectory = "/home/${user}";
 		packages = with pkgs; [
+			# Media
+			ffmpeg_6-full
+			vlc
+			spotify
+
 			#Torrent
 			qbittorrent
 
@@ -87,18 +92,8 @@ in
 			# Terminal 
 			kitty
 
-			# Web Browser
-			google-chrome
-
-			# lang
-			python3
-			rustup
-			nodejs
-			kotlin
-			gcc
-			clang-tools
-			
 			# NodeJS
+			nodePackages.npm
 			nodePackages.node2nix				
 			nodePackages.typescript
 			nodePackages.typescript-language-server
@@ -109,21 +104,9 @@ in
 			conky
 			
 			# cli
-			git
 			httpie
-			iotop
-			iftop
-			nvitop
-			htop
 			ripgrep
-			lsof
-			usbutils
 			fastfetch
-			# archives
-			zip
-			xz
-			unzip
-			p7zip
 		];
 	};
 }
