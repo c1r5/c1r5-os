@@ -20,7 +20,6 @@ in
 	services.plex = {
 		enable = true;
 		openFirewall = true;
-		user="c1r5dev";
 	};
 	
 	programs = {
