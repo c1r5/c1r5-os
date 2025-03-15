@@ -3,11 +3,26 @@ let
 	user = "c1r5dev";
 in
 {
-	services.flatpak.enable = true;
+	
+  services.flatpak.enable = true;
+  systemd.services.flatpak-repo = {
+    wantedBy = [ "multi-user.target" ];
+    path = [ pkgs.flatpak ];
+    script = ''
+      flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    '';
+  };
+	
 	services.udev.packages = [
     pkgs.android-udev-rules
   ];
 
+	services.plex = {
+		enable = true;
+		openFirewall = true;
+		user="c1r5dev";
+	};
+	
 	programs = {
 		firefox.enable = true;
 		zsh = {
@@ -111,7 +126,8 @@ in
 
 		# Tools
 		gearlever
-
+		appimage-run
+		
 		# Web Browser
 		google-chrome
 
