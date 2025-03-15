@@ -3,7 +3,37 @@ let
 	user = "c1r5dev";
 in
 {
-	
+
+  services.nginx = {
+  	enable = true;
+		virtualHosts."localhost" = {
+			listen = [{
+				addr = "0.0.0.0";
+				port = 80;
+    	}]; 
+
+			locations."/videos/" = {
+				root = "~/Videos/Movies";
+        extraConfig = ''
+          autoindex on;
+          add_header Accept-Ranges bytes;
+          types { video/mp4 mp4; }
+        '';
+			};
+
+			locations."/api/" = {
+				proxyPass = "http://localhost:3000/";
+				extraConfig = ''
+					proxy_set_header Host $host;
+					proxy_set_header X-Real-IP $remote_addr;
+					proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        '';
+			};
+		};
+  };
+
+  systemd.services.nginx.serviceConfig.ProtectHome = false;
+
   services.flatpak.enable = true;
   systemd.services.flatpak-repo = {
     wantedBy = [ "multi-user.target" ];
@@ -115,6 +145,13 @@ in
 	};
 
 	environment.systemPackages = with pkgs; [
+		# Vscode Plugin
+		nixpkgs-fmt
+
+		# Services
+		nginx
+		plex
+		
 		# Lang 
 		python3
 		rustup
@@ -158,8 +195,9 @@ in
 		enable = true;
 		allowedTCPPorts = [
 			4000
-			8080
 			3000
+			8080
+			80
 		];
 	};
 	environment.variables.EDITOR = "vim";
