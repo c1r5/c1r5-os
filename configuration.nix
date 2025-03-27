@@ -12,15 +12,15 @@ in
 				port = 80;
     	}]; 
 
-			locations."/videos/" = {
-				root = "~/Videos/Movies";
-        extraConfig = ''
-          autoindex on;
-          add_header Accept-Ranges bytes;
-          types { video/mp4 mp4; }
+			locations."/library/" = {
+				proxyPass = "http://localhost:3000/";
+				extraConfig = ''
+					proxy_set_header Host $host;
+					proxy_set_header X-Real-IP $remote_addr;
+					proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         '';
 			};
-
+			
 			locations."/api/" = {
 				proxyPass = "http://localhost:3000/";
 				extraConfig = ''
@@ -145,6 +145,8 @@ in
 	};
 
 	environment.systemPackages = with pkgs; [
+		# Warp Terminal
+		warp-terminal
 		# Vscode Plugin
 		nixpkgs-fmt
 
